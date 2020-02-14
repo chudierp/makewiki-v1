@@ -11,11 +11,16 @@ class PageList(ListView):
       2. Replace this CHALLENGE text with a descriptive docstring for PageList.
       3. Replace pass below with the code to render a template named `list.html`.
     """
+    template_name = 'wiki/index.html'
+    context_object_name = 'latest_page_list'
     model = Page
 
     def get(self, request):
         """ Returns a list of wiki pages. """
-        pass
+        pages = self.get_queryset().all()
+        return render(request, self.template_name, {
+          'latest_page_list': pages
+        })
 
 
 class PageDetailView(DetailView):
@@ -39,7 +44,10 @@ class PageDetailView(DetailView):
 
     def get(self, request, slug):
         """ Returns a specific of wiki page by slug. """
-        pass
+        page = self.get_queryset().get(slug__iexact=slug)
+        return render(request, 'wiki/page.html', {
+          'page': page
+        })
 
     def post(self, request, slug):
         pass

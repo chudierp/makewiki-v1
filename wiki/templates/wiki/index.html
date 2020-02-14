@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if latest_page_list %}
+    <ul>
+        {% for page in latest_page_list %}
+            <div class="mt-5">
+                <h2>{{ page.title }}</h2>
+                <p>{{ page.content }}</p>
+            </div>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No pages are available.</p>
+{% endif %}
+{% endblock %}
